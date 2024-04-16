@@ -2,6 +2,10 @@
 """This module defines a base class for all models in our hbnb clone"""
 import uuid
 from datetime import datetime
+import models
+from sqlalchemy import Column, Integer, String, DateTime
+
+Base = declarative_base()
 
 
 class BaseModel:
@@ -42,3 +46,8 @@ class BaseModel:
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
         return dictionary
+
+    def delete(self):
+        """ delete object
+        """
+        models.storage.delete(self)
